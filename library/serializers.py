@@ -3,9 +3,18 @@ from .models import User, Category, Book, Loan, Waitlist, Review, News, InfoPage
 
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True)
+
     class Meta:
         model = User
-        fields = ["id", "username", "email", "address", "is_approved"]
+        fields = ["id", "username", "email", "password", "address", "is_approved"]
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = super().create(validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 
 
 class CategorySerializer(serializers.ModelSerializer):

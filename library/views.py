@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework import viewsets, permissions
 from .models import User, Category, Book, Loan, Waitlist, Review, News, InfoPage
 from .serializers import (
@@ -15,46 +16,46 @@ from .serializers import (
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticated]
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticatedOrReadOnly]
 
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticatedOrReadOnly]
 
 
 class LoanViewSet(viewsets.ModelViewSet):
     queryset = Loan.objects.all()
     serializer_class = LoanSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticated]
 
 
 class WaitlistViewSet(viewsets.ModelViewSet):
     queryset = Waitlist.objects.all()
     serializer_class = WaitlistSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticated]
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticatedOrReadOnly]
 
 
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticatedOrReadOnly]
 
 
 class InfoPageViewSet(viewsets.ModelViewSet):
     queryset = InfoPage.objects.all()
     serializer_class = InfoPageSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny] if settings.DEBUG else [permissions.IsAuthenticated]
